@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Maid Meal Tracker</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Supabase V2 SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+  <!-- Toast Notifications -->
+  <div id="toast-container"></div>
+
+  <!-- Authentication Section -->
+  <main id="auth-section" class="container">
+    <div class="card auth-card">
+      <h2>Meal Tracker Login</h2>
+      <p>Log in to access your dashboard.</p>
+      <form id="auth-form">
+        <input type="email" id="auth-email" placeholder="Email" required>
+        <input type="password" id="auth-password" placeholder="Password" required>
+        <button type="submit" class="btn primary-btn">Sign In / Sign Up</button>
+      </form>
+      <p id="auth-error" class="error-msg"></p>
+    </div>
+  </main>
+
+  <!-- Main Dashboard Section -->
+  <main id="app-section" class="container hidden">
+    
+    <header class="app-header">
+      <h1>Maid Meals</h1>
+      <button id="btn-logout" class="btn outline-btn small">Logout</button>
+    </header>
+
+    <!-- Monthly Summary -->
+    <section class="card summary-card">
+      <div class="summary-grid">
+        <div class="stat"><span class="stat-value" id="stat-b">0</span><span class="stat-label">Breakfasts</span></div>
+        <div class="stat"><span class="stat-value" id="stat-l">0</span><span class="stat-label">Lunches</span></div>
+        <div class="stat"><span class="stat-value" id="stat-d">0</span><span class="stat-label">Dinners</span></div>
+      </div>
+      <hr>
+      <div class="summary-totals">
+        <p>Total Meals: <strong id="stat-total">0</strong></p>
+        <p>Days Requested: <strong id="stat-days">0</strong></p>
+      </div>
+    </section>
+
+    <!-- Calendar Controls -->
+    <section class="calendar-controls">
+      <button id="btn-prev-month" class="btn icon-btn">&lt;</button>
+      <h2 id="calendar-title">Month Year</h2>
+      <button id="btn-next-month" class="btn icon-btn">&gt;</button>
+    </section>
+    <div class="today-control">
+      <button id="btn-today" class="btn outline-btn small">Today</button>
+    </div>
+
+    <!-- Calendar Grid -->
+    <section class="card calendar-card">
+      <div class="calendar-header">
+        <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+      </div>
+      <div id="calendar-grid" class="calendar-grid">
+        <!-- Rendered via JS -->
+      </div>
+    </section>
+
+    <!-- Monthly Breakdown -->
+    <section class="card breakdown-card">
+      <h3>Monthly Breakdown</h3>
+      <ul id="breakdown-list" class="breakdown-list">
+        <!-- Rendered via JS -->
+      </ul>
+    </section>
+
+    <!-- Data Management -->
+    <section class="card data-card">
+      <h3>Data Backup</h3>
+      <div class="data-actions">
+        <button id="btn-export" class="btn outline-btn">Export Data (JSON)</button>
+        <label for="import-file" class="btn outline-btn">Import Data</label>
+        <input type="file" id="import-file" accept=".json" class="hidden">
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Date Details Modal -->
+  <div id="date-modal" class="modal hidden">
+    <div class="modal-content card">
+      <div class="modal-header">
+        <h3 id="modal-date-title">Date</h3>
+        <button id="btn-close-modal" class="btn icon-btn">&times;</button>
+      </div>
+      <div class="meal-toggles">
+        <button class="meal-btn" data-meal="breakfast">
+          <span class="checkbox"></span> Breakfast
+        </button>
+        <button class="meal-btn" data-meal="lunch">
+          <span class="checkbox"></span> Lunch
+        </button>
+        <button class="meal-btn" data-meal="dinner">
+          <span class="checkbox"></span> Dinner
+        </button>
+      </div>
+      <p class="modal-hint">Changes save automatically</p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
